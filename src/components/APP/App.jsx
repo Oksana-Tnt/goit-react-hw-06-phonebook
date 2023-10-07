@@ -6,6 +6,8 @@ import Header from 'components/Header/Header';
 import { nanoid } from 'nanoid';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
+import { UseSelector, useDispatch, useSelector } from 'react-redux';
+import { decrement, increment } from 'redux/store';
 
 export const App = () => {
   const [isShowModal, setIsShowModal] = useState(false);
@@ -63,9 +65,14 @@ export const App = () => {
     });
   };
  
+  const value= useSelector(state=>state.myValue);
+  const dispatch=useDispatch();
   return (
     <Container>
       <Header showModal={toggleModal} />
+      <div>{value}</div>
+      {/* <button onClick={()=>dispatch(increment(100))}>Increment</button>
+      <button onClick={()=>dispatch(decrement(10))}>Decrement</button> */}
       <Filter value={filter} onChange={onChangeFilter} />
       {isShowModal && (
         <Modal closeModal={toggleModal}>
